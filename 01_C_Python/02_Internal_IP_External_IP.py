@@ -7,5 +7,5 @@ in_addr.connect(("www.google.com",443))
 print("Int. IP : ", in_addr.getsockname()[0])
 
 req = requests.get("http://ipconfig.kr")
-out_addr = re.search(r'IP Address : (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', req.text)[1]
+out_addr = re.search(r'IP Address : (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', req.text[1])
 print("Ext. IP : ", out_addr)
