@@ -1,9 +1,13 @@
-from machine import Pin, PWM
+from machine import Pin, PWM, I2C
 import utime
+from ssd1306 import SSD1306_I2C
 
 # Init Buzzer PWM
 buz = PWM(Pin(13))
 buz.duty_u16(int(65536/2)) # Duty = 50%
+# Init OLED
+i2c=I2C(0, scl=Pin(21), sda=Pin(20), freq=100000)
+oled = SSD1306_I2C(128, 32, i2c)
 
 Note_Freqs = {'Do_0':523, 'Re_0':587, 'Mi_0':659, 'Fa_0':698, \
               'Sol_0':783, 'La_0':880, 'Ti_0':987, 'Do_1':1046,\
@@ -31,6 +35,9 @@ def pNote(freq, len):
 
 def pMusic(music):
     for note, l in music:
+        oled.fill(0)
+        oled.text(note +' / '+str(l), 5, 12)
+        oled.show()
         pNote(Note_Freqs[note], l)
     
 if __name__ == '__main__' :
