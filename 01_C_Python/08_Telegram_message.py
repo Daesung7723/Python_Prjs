@@ -1,7 +1,7 @@
 import asyncio
 import telegram
-# token = 
-# chat_id = 
+token = 1 
+chat_id = 2
 message = 'Hello Lao.'
 
 async def main():
